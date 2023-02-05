@@ -11,4 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: |
-          echo "::error file=app.js,line=1,col=5,endColumn=7::Missing semicolon"
+          echo "::debug::a"
+          echo "::notice::b"
+          echo "::warning::c"
+          echo "::error::d"
+          echo "::debug::a\nb"
