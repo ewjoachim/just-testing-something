@@ -10,11 +10,12 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - run: |
-            echo "::debug::a"
-            echo "::notice::b"
-            echo "::warning::c"
-            echo "::error::d"
-            echo "::debug::a\nb"
-        env:
+      - env:
           ACTIONS_STEP_DEBUG: true
+        run: |
+          echo "::debug::a"
+          echo "::notice::b"
+          echo "::warning::c"
+          echo "::error::d"
+          echo "::debug::a\nb"
+
