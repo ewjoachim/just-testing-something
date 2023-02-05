@@ -13,12 +13,13 @@ jobs:
       pull-requests: write
     steps:
       - run: |
-          gh pr comment $NUMBER --body-file - <<EOF
+          gh pr comment ${LINK} --body-file - <<EOF
             [End-to-end public repo](https://github.com/mihcaojwe/python-coverage-comment-action-end-to-end-${NUMBER}-public)
             [End-to-end private repo](https://github.com/mihcaojwe/python-coverage-comment-action-end-to-end-${NUMBER}-private)
             @$AUTHOR will be added to the private repo
           EOF
         env:
+          LINK: ${{ github.event.pull_request.html_url }}
           NUMBER: ${{ github.event.pull_request.number }}
           AUTHOR: ${{ github.event.pull_request.sender.login }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
