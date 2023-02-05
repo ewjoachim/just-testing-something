@@ -5,14 +5,14 @@ on:
   push:
     branches:
       - '*'
+env:
+  ACTIONS_STEP_DEBUG: "true"
 
 jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - env:
-          ACTIONS_STEP_DEBUG: true
-        run: |
+      - run: |
           echo "::debug::a"
           echo "::notice::b"
           echo "::warning::c"
