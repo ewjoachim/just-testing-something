@@ -1,0 +1,25 @@
+name: Link to end-to-end test repositories
+
+on:
+  pull_request_target:
+    types:
+      - opened
+
+jobs:
+  test:
+    name: Publish coverage comment
+    runs-on: ubuntu-latest
+    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    permissions:
+      pull-requests: write
+    steps:
+      - run: |
+          gh pr comment $NUMBER <<EOF
+            [End-to-end public repo](https://github.com/mihcaojwe/python-coverage-comment-action-end-to-end-${NUMBER}-public)
+            [End-to-end private repo](https://github.com/mihcaojwe/python-coverage-comment-action-end-to-end-${NUMBER}-private)
+            @$AUTHOR will be added to the private repo
+          EOF
+        env:
+          NUMBER: ${{ github.event.pull_request.number }}
+          AUTHOR: ${{ github.event.pull_request.sender.login }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
